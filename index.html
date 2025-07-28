@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prediction Fetch</title>
+</head>
+<body>
+  <h1>Run Prediction and View Output</h1>
+  <button onclick="runPrediction()">Run Prediction</button>
+  <button onclick="getOutput()">View Output CSV</button>
+  <pre id="output"></pre>
+
+  <script>
+    function runPrediction() {
+      fetch('/run-prediction')
+        .then(res => res.text())
+        .then(msg => alert(msg))
+        .catch(err => alert("Error running prediction"));
+    }
+
+    function getOutput() {
+      fetch('/get-predictions')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("output").textContent = data;
+        })
+        .catch(err => {
+          document.getElementById("output").textContent = "Error loading file.";
+        });
+    }
+  </script>
+</body>
+</html>
+
+
